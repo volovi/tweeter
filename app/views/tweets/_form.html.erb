@@ -1,0 +1,28 @@
+<%= turbo_frame_tag tweet do %>
+  <%= content_tag :div, data:{controller:"form"}, class:"tweet" do %>
+    <%= form_with(model: tweet) do |form| %>
+      <% if tweet.errors.any? %>
+        <div style="color: red">
+          <big><%= pluralize(tweet.errors.count, "error") %> prohibited this tweet from being saved:</big>
+
+          <ul>
+            <% tweet.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div>
+        <%= form.text_area :body, placeholder: "What is happening?", data:{form_target:"editor"} %>
+      </div>
+
+      <div class="row">
+        <%= button_to("Like (#{tweet.likes_count})", tweet_like_path(tweet)) if tweet.persisted? %>
+        <%= button_to("Retweet (#{tweet.retweets_count})", tweet_retweet_path(tweet)) if tweet.persisted? %>
+        <%= form.submit(style:("display:none" if tweet.persisted?), data:{form_target:"submit"}) %>
+        <%= link_to("Cancel", tweet, data:{form_target:"cancel"}) if tweet.persisted? %>
+      </div>
+    <% end %>    
+  <% end %>
+<% end %>

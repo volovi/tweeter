@@ -1,0 +1,6 @@
+<%= turbo_stream.prepend "tweets" do %>
+  <%= render partial: "tweets/tweet", locals: { tweet: @tweet } %>
+<% end %>
+<%= turbo_stream.replace @blank do %>
+  <%= render partial: "tweets/form", locals: { tweet: @blank } %>
+<% end %>

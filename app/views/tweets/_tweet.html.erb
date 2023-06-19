@@ -1,0 +1,13 @@
+<%= turbo_frame_tag tweet do %>
+  <%= content_tag :div, data:{controller:"tweet"}, class:"tweet" do %>
+    <%= content_tag :p, data:{action:"click->tweet#edit"} do %>
+      <%= tweet.body %>
+    <% end %>
+    <div class="row">
+      <%= button_to "Like (#{tweet.likes_count})", tweet_like_path(tweet) %>
+      <%= button_to "Retweet (#{tweet.retweets_count})", tweet_retweet_path(tweet) %>
+      <%= link_to "Edit", edit_tweet_path(tweet), data:{tweet_target:"edit"} %>
+      <%#= link_to "Delete", tweet, data: { "turbo-method": :delete } %>        
+    </div>
+  <% end %>
+<% end %>

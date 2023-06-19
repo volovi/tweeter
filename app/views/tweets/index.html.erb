@@ -1,0 +1,12 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Tweeter</h1>
+
+<%= turbo_stream_from "tweets" %>
+
+<%#= turbo_frame_tag "new_tweet", src: new_tweet_path, target: "_top" %>
+<%= render "form", tweet: @blank %>
+
+<div id="tweets">
+  <%= render @tweets %>
+</div>
