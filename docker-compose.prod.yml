@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  web:
+    build:
+      target: prod
+    environment:
+      RAILS_SERVE_STATIC_FILES: enabled
+      RAILS_LOG_TO_STDOUT: enabled
+      RAILS_ENV: production
