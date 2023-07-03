@@ -7,15 +7,18 @@ import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
 eagerLoadControllersFrom("controllers", application)
 application.resize_observer = new ResizeObserver(
   function(entries) {
-  	for (const entry of entries) {
+    for (const entry of entries) {
       this.layout(entry.target)
     }
   }
 )
+const threshold = 5
 application.resize_observer.layout = function(element) {
   const diff = element.offsetHeight-element.clientHeight
+  const b = element.scrollHeight
   element.style.height = "auto"
-  element.style.height = (element.scrollHeight+diff)+"px"
+  const a = element.scrollHeight
+  element.style.height = (b-a>threshold?a:b)+diff+"px"
 }
 
 // Lazy load controllers as they appear in the DOM (remember not to preload controllers in import map!)
