@@ -56,7 +56,7 @@ class TweetsController < ApplicationController
     @tweet.destroy
 
     respond_to do |format|
-      #format.turbo_stream { render turbo_stream: turbo_stream.remove(@tweet) }
+      format.turbo_stream
       format.html { redirect_to tweets_url, notice: "Tweet was successfully destroyed." }
       format.json { head :no_content }
     end
